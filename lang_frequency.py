@@ -1,3 +1,4 @@
+import collections
 import string
 import sys
 
@@ -13,37 +14,39 @@ def main():
         exit('File was not found')
 
     word_frequency_list = get_most_frequent_words_list(file_data)
-    print_first_rows(word_frequency_list)
+    print_first_rows_of_dict(word_frequency_list)
 
 
-def print_first_rows(word_frequency_list: list,
-                     number_of_rows: int = 10):
-    output_rows_number = min(number_of_rows, len(word_frequency_list))
+def print_first_rows_of_dict(word_frequency_dict: dict,
+                             number_of_rows: int = 10):
+    output_rows_number = min(number_of_rows, len(word_frequency_dict))
     print('List of the most frequency words:')
-    for i in range(output_rows_number):
-        output_string = '{}: Word - {}, frequency - {}'.format(i + 1, word_frequency_list[i][0], word_frequency_list[i][1])
+    row_number = 0
+    for key, value in word_frequency_dict.items():
+        row_number += 1
+        output_string = '{}: Word - {}, frequency - {}'.format(row_number, key, value)
+        print(output_string)
+        if row_number == output_rows_number:
+            exit()
+
+    for num in range(output_rows_number):
+        output_string = '{}: Word - {}, frequency - {}'.format(num + 1, word_frequency_dict[num][0], word_frequency_dict[num][1])
         print(output_string)
 
 
 def get_most_frequent_words_list(text: str):
     list_of_words = get_word_list_from_string(text)
-    word_frequency_dict = {}
-
+    word_frequency_dict = collections.Counter()
     for word in list_of_words:
-        if word in word_frequency_dict:
-            word_frequency_dict[word] = word_frequency_dict[word] + 1
-        else:
-            word_frequency_dict.update({word: 1})
+        word_frequency_dict[word] += 1
 
-    word_frequency_list_sorted = sorted(word_frequency_dict.items(),
-                                        key=lambda x: x[1],
-                                        reverse=True)
-    return word_frequency_list_sorted
+    return word_frequency_dict
 
 
 def get_word_list_from_string(current_string: str):
     string_with_no_punctuation = remove_punctuation_from_string(current_string.lower())
     list_of_words = string_with_no_punctuation.split()
+
     return list_of_words
 
 
