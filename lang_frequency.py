@@ -27,11 +27,7 @@ def print_first_rows_of_dict(word_frequency_dict: dict,
         output_string = '{}: Word - {}, frequency - {}'.format(row_number, key, value)
         print(output_string)
         if row_number == output_rows_number:
-            exit()
-
-    for num in range(output_rows_number):
-        output_string = '{}: Word - {}, frequency - {}'.format(num + 1, word_frequency_dict[num][0], word_frequency_dict[num][1])
-        print(output_string)
+            break  # changed to break, cause the result of this function is the printing, and in this place we need just to stop 'for' loop
 
 
 def get_most_frequent_words_list(text: str):
