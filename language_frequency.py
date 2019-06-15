@@ -7,7 +7,7 @@ def main():
     if len(sys.argv) == 2:
         path = sys.argv[1]
     else:
-        exit('Try again with right format "$ python lang_frequency.py <path to file>"')
+        exit('Try again with right format "$ python language_frequency.py <path to file>"')
 
     file_data = load_file_data(file_path=path)
     if file_data is None:
