@@ -19,7 +19,7 @@ def main():
 
 
 def print_word_frequency_list(word_frequency_list: list):
-    print('List of the most frequency words:')
+    print('List of the most frequently words:')
     row_number = 0
     for item in word_frequency_list:
         row_number += 1
