@@ -13,7 +13,7 @@ def main():
     if file_data is None:
         exit('File was not found')
 
-    word_frequency_list = get_number_ot_most_frequent_words(text=file_data,
+    word_frequency_list = get_number_of_most_frequent_words(text=file_data,
                                                             number_of_entries=10)
     print_word_frequency_list(word_frequency_list)
 
@@ -27,7 +27,7 @@ def print_word_frequency_list(word_frequency_list: list):
         print(output_string)
 
 
-def get_number_ot_most_frequent_words(text: str,
+def get_number_of_most_frequent_words(text: str,
                                       number_of_entries: int = 10):
     list_of_words = get_word_list_from_string(text)
     word_frequency_counter = Counter(list_of_words).most_common(number_of_entries)
