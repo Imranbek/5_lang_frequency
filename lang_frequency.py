@@ -1,6 +1,6 @@
-import collections
 import string
 import sys
+from collections import Counter
 
 
 def main():
@@ -13,34 +13,31 @@ def main():
     if file_data is None:
         exit('File was not found')
 
-    word_frequency_list = get_most_frequent_words_list(file_data)
-    print_first_rows_of_dict(word_frequency_list)
+    word_frequency_list = get_number_ot_most_frequent_words(text=file_data,
+                                                            number_of_entries=10)
+    print_word_frequency_list(word_frequency_list)
 
 
-def print_first_rows_of_dict(word_frequency_dict: dict,
-                             number_of_rows: int = 10):
-    output_rows_number = min(number_of_rows, len(word_frequency_dict))
+def print_word_frequency_list(word_frequency_list: list):
     print('List of the most frequency words:')
     row_number = 0
-    for key, value in word_frequency_dict.items():
+    for item in word_frequency_list:
         row_number += 1
-        output_string = '{}: Word - {}, frequency - {}'.format(row_number, key, value)
+        output_string = f'{row_number}: Word - {item[0]}, frequency - {item[1]}'
         print(output_string)
-        if row_number == output_rows_number:
-            break  # changed to break, cause the result of this function is the printing, and in this place we need just to stop 'for' loop
 
 
-def get_most_frequent_words_list(text: str):
+def get_number_ot_most_frequent_words(text: str,
+                                      number_of_entries: int = 10):
     list_of_words = get_word_list_from_string(text)
-    word_frequency_dict = collections.Counter()
-    for word in list_of_words:
-        word_frequency_dict[word] += 1
+    word_frequency_counter = Counter(list_of_words).most_common(number_of_entries)
 
-    return word_frequency_dict
+    return word_frequency_counter
 
 
 def get_word_list_from_string(current_string: str):
-    string_with_no_punctuation = remove_punctuation_from_string(current_string.lower())
+    current_string_lower = current_string.lower()
+    string_with_no_punctuation = remove_punctuation_from_string(current_string_lower)
     list_of_words = string_with_no_punctuation.split()
 
     return list_of_words
@@ -59,7 +56,7 @@ def remove_punctuation_from_string(current_string: str):
 
 def load_file_data(file_path: str):
     try:
-        with open(file_path, "r") as file:
+        with open(file_path, 'r') as file:
             return file.read()
     except FileNotFoundError:
         return None
