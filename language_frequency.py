@@ -23,7 +23,7 @@ def print_word_frequency_list(word_frequency_list: list):
     row_number = 0
     for item in word_frequency_list:
         row_number += 1
-        output_string = f'{row_number}: Word - {item[0]}, frequency - {item[1]}'
+        output_string = '{}: Word - {}, frequency - {}'.format(row_number, item[0], item[1])
         print(output_string)
 
 
