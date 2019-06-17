@@ -21,9 +21,9 @@ def main():
 def print_word_frequency_list(word_frequency_list: list):
     print('List of the most frequently used words:')
     row_number = 0
-    for item in word_frequency_list:
+    for word_counter in word_frequency_list:
         row_number += 1
-        output_string = '{}: Word - {}, frequency - {}'.format(row_number, item[0], item[1])
+        output_string = '{}: Word - {}, frequency - {}'.format(row_number, word_counter[0], word_counter[1])
         print(output_string)
 
 
