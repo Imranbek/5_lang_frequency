@@ -20,19 +20,18 @@ def main():
 
 def print_word_frequency_list(word_frequency_list: list):
     print('List of the most frequently used words:')
-    row_number = 0
-    for word_counter in word_frequency_list:
-        row_number += 1
-        output_string = '{}: Word - {}, frequency - {}'.format(row_number, word_counter[0], word_counter[1])
-        print(output_string)
+    for row_number, (word, counter) in enumerate(word_frequency_list, start=1):
+        output_string_draft = '{}: Word - {}, frequency - {}'
+        print(output_string_draft.format(row_number, word, counter))
 
 
 def get_number_of_most_frequent_words(text: str,
                                       number_of_entries: int = 10):
     list_of_words = get_word_list_from_string(text)
-    word_frequency_counter = Counter(list_of_words).most_common(number_of_entries)
+    word_counter = Counter(list_of_words)
+    word_counter_order_by_frequency = word_counter.most_common(number_of_entries)
 
-    return word_frequency_counter
+    return word_counter_order_by_frequency
 
 
 def get_word_list_from_string(current_string: str):
